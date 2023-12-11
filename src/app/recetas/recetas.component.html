@@ -1,0 +1,123 @@
+<mat-card>
+<form (ngSubmit)="submit()">
+    <mat-card-content>
+      <p class="subtitulo">Recetas</p>
+      <mat-form-field>
+        <mat-label>Producto</mat-label>
+        <mat-select [(ngModel)]="productoSeleccionado" name="openDeleteDialog" [disabled]="editMode">
+          <mat-option *ngFor="let producto of productos" [value]="producto.Id">
+            {{producto.Nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <fieldset class="row m-2 border rounded py-3" [disabled]="!productoSeleccionado">
+        <legend>Materia prima</legend>
+        <div class="mb-2">
+          <button type="button" mat-raised-button color="primary" (click)="openDialog()">
+            Agregar materia prima
+            <mat-icon fontIcon="add"></mat-icon>
+          </button>
+        </div>
+        <div class="col-3" *ngFor="let materia of materiaList">
+          <div class="card bg-light">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              {{ materia.nombre }}
+              <button type="button" mat-button color="warn" (click)="removeMateria(materia.productoId)"><mat-icon fontIcon="do_not_disturb_on"></mat-icon></button>
+            </div>
+            <div class="card-body text-center">
+              <p class="card-text">
+                {{ materia.cantidad }} ({{ materia.medida }})
+              </p>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="row m-2 border rounded py-3" [disabled]="!productoSeleccionado">
+        <legend>Operaciones</legend>
+        <div class="mb-2">
+          <button type="button" mat-raised-button color="primary" (click)="openOperacionDialog()">
+            Agregar operación
+            <mat-icon fontIcon="add"></mat-icon>
+          </button>
+        </div>
+        <div class="col-3" *ngFor="let operacion of operacionesList; let i = index">
+          <div class="card bg-light">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              {{ operacion.nombre }}
+              <button type="button" mat-button color="warn" (click)="removeOperacion(i)"><mat-icon fontIcon="do_not_disturb_on"></mat-icon></button>
+            </div>
+            <div class="card-body text-center">
+              <p class="card-text">
+                {{ operacion.descripcion }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="d-flex justify-content-end gap-3 mx-4">
+        <div class="d-flex gap-3" *ngIf="editMode">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            (click)="saveChanges()"
+          >
+            Guardar cambios
+          </button>
+          <button
+            mat-raised-button
+            type="button"
+            color="warn"
+            (click)="cancelEdit()"
+          >
+            Cancelar
+          </button>
+        </div>
+        <button
+          *ngIf="!editMode"
+          mat-raised-button
+          type="submit"
+          color="primary"
+        >
+          Guardar
+        </button>
+      </div>
+    </mat-card-footer>
+    <div *ngIf="error.length" class="alert alert-danger mx-4 mt-3">
+      <div *ngFor="let e of error">{{ e.ErrorMessage ?? e }}.</div>
+    </div>
+  </form>
+
+  <div class="p-5">
+    <table class="table" *ngIf="recetas.length">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of recetas">
+          <td scope="row">{{ e.Id }}</td>
+          <td>{{ e.Producto.Nombre }}</td>
+          <td>{{ e.CreatedAt | date:'dd-MM-yyyy' }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="loadReceta(e.Id)"
+            >
+              Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</mat-card>

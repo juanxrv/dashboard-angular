@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Orden de producción</h1>
+<div mat-dialog-content>
+  <mat-form-field class="w-100">
+    <mat-label>Selecciona el producto</mat-label>
+    <mat-select [(ngModel)]="producto">
+      <mat-option *ngFor="let prod of productos" [value]="prod">
+        {{ prod.Nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="w-100" *ngIf="producto">
+    <mat-label>Cantidad</mat-label>
+    <input matInput type="number" min="1" [max]="producto.Cantidad" [(ngModel)]="cantidad">
+  </mat-form-field>
+
+  <div *ngIf="producto" class="d-flex justify-content-between">
+    <p>Unidad: {{ producto.Medida }} </p>
+    <p>Cantidad máxima: {{ producto.Cantidad }} </p>
+  </div>
+
+  <div *ngIf="error.length" class="alert alert-danger mx-4 mt-3">
+    <div *ngFor="let e of error">{{ e.ErrorMessage }}.</div>
+  </div>
+  
+</div>
+<div mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-button (click)="onNoClick()" color="warn">Cancelar</button>
+  <button mat-button (click)="submit()" [disabled]="!producto || !cantidad || (cantidad > producto.Cantidad || cantidad <= 0)" color="primary">Ok</button>
+</div>

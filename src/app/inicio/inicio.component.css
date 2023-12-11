@@ -1,0 +1,171 @@
+.image-containerr {
+    position: relative;
+    overflow: hidden;
+}
+.img-fluid {
+    max-width: 110%;
+    max-height: 150%;
+    }
+
+.overlay-text {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 100px;
+  }
+
+  /* Additional CSS for the button-like appearance of the h2 */
+.section-heading {
+    background-color: rgba(138, 73, 203, 0.7); /* Adjust the background color */
+    color: #fff; /* Adjust the text color */
+    padding: 10px 20px;
+    border-radius: 5px; /* Adjust the border radius to make it look like a button */
+}
+
+.section-heading,
+.text-muted {
+    margin: 0; /* Remove default margins to prevent spacing */
+    color: #fff; /* Set the color of both the h2 and p to white */
+  }
+.half-height img {
+      height: 40vh; /* 50% del alto de la ventana */
+    }
+    .half-width img{
+      height: 80vh;
+    }
+
+
+    /* Estilo personalizado para el texto púrpura */
+.subtituloim{
+    text-align: center;
+    color: #fff;
+    font-size: 5rem; /* Tamaño de la fuente muy grande (ajusta según lo que desees) */
+    font-weight: bold; /* Fuente en negrita */
+    margin-top: 70px; 
+    padding-bottom: 30px;
+    font-family: fantasy;
+
+
+  }
+  .bajo{
+    background-color: #efe9e9e0;
+  }
+.subtitulo{
+    text-align: center;
+    color: rgb(217, 40, 217);
+    font-size: 8rem; /* Tamaño de la fuente muy grande (ajusta según lo que desees) */
+    font-weight: bold; /* Fuente en negrita */
+    margin-top: 40px; 
+    padding-bottom: 30px;
+    font-family: fantasy;
+
+
+  }
+
+  .subtituloe{
+    text-align: center;
+    color: rgb(217, 40, 217);
+    font-size: 5rem; /* Tamaño de la fuente muy grande (ajusta según lo que desees) */
+    font-weight: bold; /* Fuente en negrita */
+    margin-top: 40px; 
+    padding-bottom: 30px;
+    font-family: fantasy;
+
+
+  }
+  .subtitulod{
+    text-align: center;
+    color: rgb(247, 241, 247);
+    font-size: 4rem; /* Tamaño de la fuente muy grande (ajusta según lo que desees) */
+    font-weight: bold; /* Fuente en negrita */
+    margin-top: 70px; 
+    padding-bottom: 30px;
+    -webkit-text-stroke: 0.5px rgb(60, 58, 58);
+    color: transparent; 
+  }
+.purple-text {
+    text-align: center;
+    color: purple;
+    font-size: 4rem; /* Tamaño de la fuente muy grande (ajusta según lo que desees) */
+    font-weight: bold; /* Fuente en negrita */
+    margin-top: 70px; /* Margen superior para separar del contenido anterior */
+  }
+.black-text {
+    text-align: center;
+    color: black;
+    font-size: 2rem; /* Tamaño de la fuente muy grande (ajusta según lo que desees) */
+  }
+.mat-raised-button {
+  font-size: 2rem; /* Ajusta el tamaño de la fuente según lo que desees */
+  padding: 20px 35px; /* Ajusta el padding según lo que desees */
+  color: white; /* Color del texto blanco */
+  background-color: #7f27b1; /* Color de fondo verde */
+  border-radius: 3px; /* Ajusta el radio de los bordes según lo que desees */
+}
+
+ /* Custom styles */
+ .hero-container {
+  position: relative;
+  text-align: center;
+}
+
+.hero-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.subtitulo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+
+
+
+
+
+.product-card {
+  transition: transform 0.3s;
+}
+
+.product-card:hover {
+  transform: scale(1.1);
+}

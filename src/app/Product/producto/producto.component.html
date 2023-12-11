@@ -1,0 +1,137 @@
+<mat-card>
+  <form [formGroup]="productoForm" (ngSubmit)="submit()">
+    <mat-card-content>
+      <p class="subtitulo">Producto</p>
+
+      <mat-form-field class="mat-50">
+        <mat-label>Nombre del producto</mat-label>
+        <input formControlName="nombre" matInput />
+      </mat-form-field>
+
+      <mat-form-field class="mat-50">
+        <mat-label>Descripcion</mat-label>
+        <input matInput formControlName="descripcion" />
+      </mat-form-field>
+
+      <mat-form-field class="mat-50">
+        <mat-label>Cantidad</mat-label>
+        <input matInput formControlName="cantidad" type="number" />
+      </mat-form-field>
+
+      <mat-form-field class="mat-50">
+        <mat-label>$Costo</mat-label>
+        <input matInput formControlName="costo" type="number" />
+      </mat-form-field>
+
+      <mat-form-field class="mat-50">
+        <mat-label>$Precio</mat-label>
+        <input matInput formControlName="precio" type="number" />
+      </mat-form-field>
+
+      <mat-form-field class="mat-50">
+        <mat-label>Medida</mat-label>
+        <mat-select formControlName="medida">
+          <mat-option value="pieza">Pieza</mat-option>
+          <mat-option value="kilo">Kilo</mat-option>
+          <mat-option value="metro">Metro</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- <mat-form-field>
+        <mat-label>Proveedor</mat-label>
+        <mat-select formControlName="proveedor">
+          <mat-option
+            *ngFor="let proveedor of proveedores"
+            [value]="proveedor.Id"
+            >{{ proveedor.Nombre }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field> -->
+
+      <div class="w-50 m-auto">
+        <img class="w-100" [src]="imagenSeleccionada" />
+        <label for="formFile" class="form-label">Imagen del producto</label>
+        <input
+          class="form-control"
+          type="file"
+          id="formFile"
+          (change)="uploadImage($event)"
+        />
+      </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="d-flex justify-content-end gap-3 mx-4">
+        <div class="d-flex gap-3" *ngIf="editMode">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            (click)="saveChanges()"
+          >
+            Guardar cambios
+          </button>
+          <button
+            mat-raised-button
+            type="button"
+            color="warn"
+            (click)="cancelEdit()"
+          >
+            Cancelar
+          </button>
+        </div>
+        <button
+          *ngIf="!editMode"
+          mat-raised-button
+          type="submit"
+          color="primary"
+        >
+          Guardar
+        </button>
+      </div>
+    </mat-card-footer>
+    <div *ngIf="error.length" class="alert alert-danger mx-4 mt-3">
+      <div *ngFor="let e of error">{{ e.ErrorMessage ?? e }}.</div>
+    </div>
+  </form>
+
+  <div class="p-5">
+    <table class="table" *ngIf="productos.length">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Costo</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Medida</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of productos">
+          <td scope="row">{{ e.Nombre }}</td>
+          <td>{{ e.Descripcion }}</td>
+          <td>{{ e.Cantidad }}</td>
+          <td>{{ e.Costo }}</td>
+          <td>{{ e.Precio }}</td>
+          <td>{{ e.Medida }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="loadProducto(e.Id)"
+            >
+              Editar
+            </button>
+          </td>
+          <td>
+            <button mat-raised-button color="warn" (click)="openDialog(e.Id)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</mat-card>

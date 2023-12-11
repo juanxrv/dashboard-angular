@@ -1,0 +1,33 @@
+<mat-card>
+  <div class="container mt-5">
+    <h1>Listado de Pedidos del Usuario</h1>
+    <table class="table" *ngIf="pedidos.length">
+      <thead>
+        <tr>
+          <th>ID de Pedido</th>
+          <th>Productos</th>
+          <th>Fecha</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ped of pedidos">
+          <td>{{ped.Id}}</td>
+          <td>
+            <ul>
+              <li *ngFor="let prod of ped.PedidoProductos">
+                {{prod.Producto.Nombre}}
+              </li>
+            </ul>
+          </td>
+          <td>{{ped.CreatedAt|date: 'dd-MM-yyyy'}}</td>
+          <td>${{ped.Total}}</td>
+        </tr>
+        <!-- Agrega más filas de acuerdo a los pedidos del usuario -->
+      </tbody>
+    </table>
+    <div class="" *ngIf="!pedidos.length">
+      <h3>Aún no tienes pedidos.</h3>
+    </div>
+  </div>
+</mat-card>

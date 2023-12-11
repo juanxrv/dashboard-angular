@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-lg-6">
+      <img [src]="producto.Imagen" alt="Producto" class="img-fluid" />
+    </div>
+    <div class="col-lg-6">
+      <div class="d-flex flex-column justify-content-center h-100 px-5">
+        <h2>{{producto.Nombre}}</h2>
+        <p>{{producto.Descripcion}}</p>
+        <h3>Precio: ${{producto.Precio}} MXN</h3>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-primary" (click)="addToCart(producto)">Agregar al Carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

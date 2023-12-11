@@ -1,0 +1,64 @@
+<!-- Hero section -->
+<section class="page-section">
+  <div class="hero-container">
+    <img class="hero-image" src="./assets/new.png" alt="Hero Image" />
+    <div class="hero-text">
+      <h1 class="subtitulod">Haz de cada fiesta un momento especiall</h1>
+      <h2 class="section-heading">Encuentra lo mejor aquí</h2>
+    </div>
+  </div>
+</section>
+
+<!-- Categories section -->
+<div class="container">
+  <h1 class="subtituloe">Compra por ocasión</h1>
+  <div class="row">
+    <div *ngFor="let prod of productos" class="col-lg-4 col-md-6">
+      <a [routerLink]="['/detalle-producto', prod.Id]">
+        <div class="product-card">
+          <img
+            [src]="prod.Imagen ?? './assets/new.png'"
+            alt="Articulos para fiestas"
+          />
+          <h5 class="card-title">{{prod.Nombre}}</h5>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<br />
+
+<!-- Welcome section
+<section class="welcome-section text-center py-5 bajo">
+  <div class="container">
+    <h2 class="subtitulo">¡Lupita regalos y algo mas!</h2>
+  </div>
+</section> -->
+
+<!-- Call to action section -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <img
+        src="https://partycitymx.vtexassets.com/assets/vtex.file-manager-graphql/images/8bc876c1-1656-49c1-9a43-2b68c3ff27a8___5f384fb03e7469ebc13a0ff2cf1186e3.jpg"
+        alt="Happy Birthday"
+        width="100%"
+      />
+    </div>
+    <div class="col-md-5">
+      <p class="subtitulo">¡El cumpleaños más feliz comienza aquí!</p>
+      <p>Has tu cumpleaños una celebración inolvidable</p>
+      <div class="d-flex justify-content-center align-items-center">
+        <!-- <button class="btn btn-primary">Botón</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<br /><br />
+
+<!-- Footer -->
+<footer class="footer">
+  <p>
+    Todos los derechos reservados &copy; 2023 | Venta de Productos para Fiestas
+  </p>
+</footer>

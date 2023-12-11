@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Confirmar</h1>
+<div mat-dialog-content>
+  <p>¿Deseas recibir la compra de {{ data.nombre }}?</p>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-button (click)="onNoClick()" color="warn">Cancelar</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Ok</button>
+</div>

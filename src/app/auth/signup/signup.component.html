@@ -1,0 +1,81 @@
+<div class="container mt-3">
+  <form (ngSubmit)="submit()" class="row">
+    <div class="col-6 d-flex flex-column m-auto">
+      <p class="h2">Registro</p>
+
+      <mat-form-field>
+        <mat-label>Escribe tu nombre</mat-label>
+        <input
+          type="text"
+          matInput
+          required
+          [(ngModel)]="nombre"
+          name="nombre"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Escribe tu apellido</mat-label>
+        <input
+          type="text"
+          matInput
+          required
+          [(ngModel)]="apellido"
+          name="apellido"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Escribe tu nombre de usuario</mat-label>
+        <input
+          type="text"
+          matInput
+          required
+          [(ngModel)]="userName"
+          name="userName"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Escribe tu correo</mat-label>
+        <input
+          type="email"
+          matInput
+          required
+          [(ngModel)]="email"
+          name="email"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Escribe tu contraseña</mat-label>
+        <input
+          matInput
+          type="password"
+          required
+          [(ngModel)]="password"
+          name="password"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Confirma tu contraseña</mat-label>
+        <input
+          matInput
+          type="password"
+          required
+          [(ngModel)]="password_confirmation"
+          name="password_confirmation"
+        />
+      </mat-form-field>
+
+      <div class="d-flex justify-content-end">
+        <button mat-raised-button color="primary">Registrarse</button>
+      </div>
+
+      <div *ngIf="error.length" class="alert alert-danger mt-3">
+        <div *ngFor="let e of error">{{ e.ErrorMessage }}.</div>
+      </div>
+    </div>
+  </form>
+</div>

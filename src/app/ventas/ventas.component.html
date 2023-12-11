@@ -1,0 +1,59 @@
+<mat-card>
+  <mat-card-content>
+    <p class="subtitulo">Ventas</p>
+    <div class="p-5">
+      <table class="table" *ngIf="ventas.length">
+        <thead>
+          <tr>
+            <th scope="col">Pedido</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Total</th>
+            <th scope="col">Estatus</th>
+            <th scope="col" colspan="2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of ventas">
+            <td scope="row">{{ e.PedidoId }}</td>
+            <td>{{ e.User.UserName }}</td>
+            <td>{{ e.CreatedAt }}</td>
+            <td>{{ e.Total }}</td>
+            <td>
+              {{
+                e.Estatus == 1
+                  ? "Completada"
+                  : e.Estatus == 2
+                  ? "Pendiente"
+                  : "Cancelada"
+              }}
+            </td>
+            <td>
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="openEntregarDialog(e)"
+                [disabled]="e.Entregada === 1 || e.Estatus === 3"
+              >
+                Entregar
+              </button>
+            </td>
+            <td>
+              <button
+                mat-raised-button
+                color="warn"
+                (click)="openCancelarDialog(e)"
+                [disabled]="e.Entregada === 1 || e.Estatus === 3"
+              >
+                Cancelar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!ventas.length">
+        <h3>No hay ventas todavia.</h3>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

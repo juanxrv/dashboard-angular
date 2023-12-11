@@ -1,0 +1,98 @@
+<mat-toolbar
+  color="primary"
+  class="mat-elevation-z8"
+  style="display: flex; justify-content: space-between"
+>
+  <div>
+    <button
+      *ngIf="authService.userData && authService.userData.Role == 'Admin'"
+      (click)="drawer.toggle()"
+      mat-icon-button
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>
+      <img src="./assets/logo.png" alt="hola" width="100" heigh="50" />
+    </span>
+    <!-- <button routerLink="" mat-button>Inicio</button> -->
+    <!-- <button routerLink="about" mat-button>Nosotros</button> -->
+    <!-- <button
+      routerLink="Producto"
+      mat-button
+      *ngIf="authService.userData && authService.userData.Role == 'Admin'"
+    >
+      Administración
+    </button> -->
+    <button routerLink="login" mat-button *ngIf="!authService.userData">
+      Iniciar sesión
+    </button>
+    <button routerLink="registro" mat-button *ngIf="!authService.userData">
+      Registro
+    </button>
+  </div>
+  <div>
+    <!-- <button mat-button matTooltip="Carrito de compras" routerLink="carrito">
+      {{ carritoService.productos.length }}
+      <mat-icon>shopping-bag</mat-icon>
+    </button> -->
+    <!-- <button
+      mat-button
+      *ngIf="authService.userData"
+      routerLink="usuario-pedidos"
+    >
+      {{ authService.userData.Name }}
+    </button> -->
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="logout()"
+      *ngIf="authService.userData"
+    >
+      Cerrar sesión
+    </button>
+  </div>
+</mat-toolbar>
+
+<mat-drawer-container autosize>
+  <mat-drawer
+    #drawer
+    [opened]="this.authService.userData?.Role === 'Admin'"
+    mode="side"
+    position="start"
+  >
+    <mat-nav-list>
+      <mat-list-item routerLink="Producto">
+        <mat-icon matListItemIcon>assessment</mat-icon> Producto
+      </mat-list-item>
+      <mat-list-item routerLink="Recetas">
+        <mat-icon matListItemIcon>inventory_2</mat-icon> Recetas
+      </mat-list-item>
+      <mat-list-item routerLink="Materiap">
+        <mat-icon matListItemIcon>inventory_2</mat-icon> Materia prima
+      </mat-list-item>
+      <mat-list-item routerLink="Produccion">
+        <mat-icon matListItemIcon>fact_check</mat-icon> Produccion
+      </mat-list-item>
+      <mat-list-item routerLink="compras">
+        <mat-icon matListItemIcon>storefront</mat-icon> Compras
+      </mat-list-item>
+      <mat-list-item routerLink="ventas">
+        <mat-icon matListItemIcon>leaderboard</mat-icon> Ventas
+      </mat-list-item>
+      <mat-list-item routerLink="Proveedores">
+        <mat-icon matListItemIcon>store</mat-icon> Proveedores
+      </mat-list-item>
+      <mat-list-item routerLink="Usuario">
+        <mat-icon matListItemIcon>supervisor_account</mat-icon> Usuarios
+      </mat-list-item>
+      <!-- <mat-list-item routerLink="etl">
+        <mat-icon matListItemIcon>monitoring</mat-icon> ETL
+      </mat-list-item> -->
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div style="text-align: center; min-height: 600px">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

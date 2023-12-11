@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Materia prima</h1>
+<div mat-dialog-content>
+  <mat-form-field class="w-100">
+    <mat-label>Selecciona la materia prima</mat-label>
+    <mat-select [(ngModel)]="materia">
+      <mat-option *ngFor="let mat of materias" [value]="mat">
+        {{ mat.Nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="w-100" *ngIf="materia">
+    <mat-label>Cantidad</mat-label>
+    <input matInput type="number" min="1" [max]="materia.Cantidad" [(ngModel)]="cantidad">
+  </mat-form-field>
+
+  <div *ngIf="materia" class="d-flex justify-content-between">
+    <p>Unidad: {{ materia.Medida }} </p>
+    <p>Cantidad máxima: {{ materia.Cantidad }} </p>
+  </div>
+
+</div>
+<div mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-button (click)="onNoClick()" color="warn">Cancelar</button>
+  <button mat-button (click)="submit()" [disabled]="!materia || !cantidad || (cantidad > materia.Cantidad || cantidad <= 0)" color="primary">Ok</button>
+</div>

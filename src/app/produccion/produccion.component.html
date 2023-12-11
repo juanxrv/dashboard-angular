@@ -1,0 +1,144 @@
+<mat-card>
+  <form (ngSubmit)="submit()">
+    <mat-card-content>
+      <p class="subtitulo">Producción</p>
+      <div class="d-flex justify-content-end mb-3">
+        <button
+          type="button"
+          (click)="openOrdenDialog()"
+          mat-fab
+          matTooltip="Crear orden de producción"
+          matTooltipPosition="left"
+          color="primary"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <fieldset class="row m-2 border rounded py-3" style="min-height: 10rem">
+        <legend>Operaciones</legend>
+        <div
+          class="col-4"
+          *ngFor="let operacion of operacionesList; let i = index"
+        >
+          <div class="card bg-light">
+            <div
+              class="card-header d-flex align-items-center justify-content-between"
+            >
+              {{ operacion.Nombre }}
+            </div>
+            <div class="card-body">
+              <mat-form-field>
+                <mat-label>Selecciona la fecha de inicio y fin</mat-label>
+                <mat-date-range-input [rangePicker]="picker" [min]="minDate">
+                  <input
+                    matStartDate
+                    placeholder="Fecha inicio"
+                    (dateChange)="setFecha('FechaInicio', operacion.Id, $event)"
+                  />
+                  <input
+                    matEndDate
+                    placeholder="Fecha fin"
+                    [(value)]="operacion.FechaFin"
+                    (dateChange)="setFecha('FechaFin', operacion.Id, $event)"
+                  />
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+            </div>
+            <div class="card-footer">
+              <p class="card-text">
+                {{ operacion.Descripcion }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="d-flex gap-3 justify-content-end py-2 px-4">
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          [disabled]="!currentOrdenId"
+        >
+          Procesar orden
+        </button>
+        <button
+          mat-raised-button
+          type="button"
+          color="warn"
+          [disabled]="!currentOrdenId"
+          (click)="resetValues()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </mat-card-footer>
+    <div *ngIf="error.length" class="alert alert-danger mx-4 mt-3">
+      <div *ngFor="let e of error">{{ e.ErrorMessage }}.</div>
+    </div>
+  </form>
+
+  <div class="p-5">
+    <table class="table" *ngIf="ordenes.length">
+      <thead>
+        <tr>
+          <th scope="col">Folio</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Cantidad solicitada</th>
+          <th scope="col">Costo unitario</th>
+          <th scope="col">Costo total</th>
+          <th scope="col">Estado</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of ordenes">
+          <td scope="row">{{ e.Folio }}</td>
+          <td>{{ e.Fecha | date : "dd-MM-yyyy" }}</td>
+          <td>{{ e.Cantidad }}</td>
+          <td>{{ e.CantidadSoliciada }}</td>
+          <td>{{ e.CostoUnitario }}</td>
+          <td>{{ e.CostoTotal }}</td>
+          <td>
+            {{
+              e.Estatus == 1
+                ? "Completado"
+                : e.Estatus == 2
+                ? "Pendiente"
+                : "Cancelado"
+            }}
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="loadOrden(e.Id)"
+              [disabled]="e.Estatus === 1 ? true : e.Estatus === 0"
+            >
+              Procesar
+            </button>
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="openCancelOrderDialog({ id: e.Id, folio: e.Folio })"
+              [disabled]="e.Estatus === 1 || 0"
+            >
+              Cancelar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</mat-card>

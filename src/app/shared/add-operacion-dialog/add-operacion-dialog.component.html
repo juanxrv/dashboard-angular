@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Operación</h1>
+<div mat-dialog-content>
+
+  <mat-form-field class="w-100">
+    <mat-label>Nombre</mat-label>
+    <input matInput type="text" [(ngModel)]="nombre" (change)="nombre = nombre.trim()">
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Descripción</mat-label>
+    <input matInput type="text" [(ngModel)]="descripcion" (change)="descripcion = descripcion.trim()">
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-button (click)="onNoClick()" color="warn">Cancelar</button>
+  <button mat-button (click)="submit()" [disabled]="!nombre || !descripcion" color="primary">Ok</button>
+</div>

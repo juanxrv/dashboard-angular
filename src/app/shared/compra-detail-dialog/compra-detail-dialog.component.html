@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Confirmar</h1>
+<div mat-dialog-content>
+  <p>Productos de la compra {{ data.nombre }}:</p>
+  <ul>
+    <li *ngFor="let prod of data.productos">
+      {{ prod.Producto.Nombre }} : {{ prod.Cantidad }}
+      {{ prod.Producto.Medida }}
+    </li>
+  </ul>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-button (click)="onNoClick()" color="warn">Cancelar</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">
+    Ok
+  </button>
+</div>

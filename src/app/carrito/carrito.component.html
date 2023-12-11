@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <h2>Carrito de Compras</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of carrito">
+        <td>{{e.producto}}</td>
+        <td>${{e.precio}}</td>
+        <td>{{e.cantidad}}</td>
+        <td>${{e.total}}</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="text-right"><strong>Total</strong></td>
+        <td><strong>${{total}}</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-right">
+    <button class="btn btn-primary" routerLink="/checkout">Realizar Pago</button>
+  </div>
+</div>

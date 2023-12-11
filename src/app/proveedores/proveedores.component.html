@@ -1,0 +1,95 @@
+<mat-card>
+  <form [formGroup]="proveedoresForm" (ngSubmit)="submit()">
+    <mat-card-content>
+      <p class="subtitulo">Proveedores</p>
+      <mat-form-field class="mat-50">
+        <mat-label>Nombre del proveedor</mat-label>
+        <input formControlName="nombre" matInput />
+      </mat-form-field>
+      <mat-form-field class="mat-50">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="direccion" />
+      </mat-form-field>
+
+      <mat-form-field class="mat-50">
+        <mat-label>Teléfono</mat-label>
+        <input type="number" matInput formControlName="telefono" />
+      </mat-form-field>
+
+      <mat-form-field class="mat-50">
+        <mat-label>Correo</mat-label>
+        <input type="email" matInput formControlName="correo" />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="d-flex justify-content-end gap-3 mx-4">
+        <div class="d-flex gap-3" *ngIf="editMode">
+          <button
+            mat-raised-button
+            type="button"
+            color="primary"
+            (click)="saveChanges()"
+          >
+            Guardar cambios
+          </button>
+          <button
+            mat-raised-button
+            type="button"
+            color="warn"
+            (click)="cancelEdit()"
+          >
+            Cancelar
+          </button>
+        </div>
+        <button
+          *ngIf="!editMode"
+          mat-raised-button
+          type="submit"
+          color="primary"
+        >
+          Guardar
+        </button>
+      </div>
+    </mat-card-footer>
+    <div *ngIf="error.length" class="alert alert-danger mx-4 mt-3">
+      <div *ngFor="let e of error">{{ e.ErrorMessage }}.</div>
+    </div>
+  </form>
+
+  <div class="p-5">
+    <table class="table" *ngIf="proveedores.length">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Correo</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of proveedores">
+          <td scope="row">{{ e.Nombre }}</td>
+          <td>{{ e.Direccion }}</td>
+          <td>{{ e.Telefono }}</td>
+          <td>{{ e.Correo }}</td>
+          <td>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="loadProveedor(e.Id)"
+            >
+              Editar
+            </button>
+          </td>
+          <td>
+            <button mat-raised-button color="warn" (click)="openDialog(e.Id)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</mat-card>
